@@ -18,7 +18,7 @@ def checkout () {
 }
 
 def JARbuild () {
-	sh "mvn package"
+	sh "mvn package "
 }
 
 def Nexus () {

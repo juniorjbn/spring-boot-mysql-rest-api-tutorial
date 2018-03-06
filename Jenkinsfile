@@ -1,26 +1,14 @@
 #!groovy
 
 node('maven') {
-	checkout()
-	JARbuild()
-	Nexus()
-	IMGbuild()
-	DEVdeploy()
-	STGdeploy()
-}
+	
+	stage ('checkout') {
+		checkout scm
+	}
 
-/* ### def stages ### */
+	stage ('JARbuild') {
+		sh "ls -lah"
+		sh "mvn package"
+	}
 
-def checkout () {
-	stage 'Checkout'
-	deleteDir()
-	checkout scm
-}
-
-def JARbuild () {
-	sh "mvn clean install -DskipTests=true"
-}
-
-def Nexus () {
-	sh "echo uploading"
 }

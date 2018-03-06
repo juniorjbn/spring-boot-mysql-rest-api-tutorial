@@ -4,8 +4,8 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.example</groupId>
-	<artifactId>easy-notes</artifactId>
-	<version>1.0.0</version>
+	<artifactId>ROOT</artifactId>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
 	<name>easy-notes</name>

@@ -18,7 +18,7 @@ def checkout () {
 }
 
 def JARbuild () {
-	sh "mvn clean install -DskipTests=true "
+	sh "mvn clean install -DskipTests=true"
 }
 
 def Nexus () {

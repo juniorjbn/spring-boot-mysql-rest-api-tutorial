@@ -7,8 +7,8 @@ node('maven') {
 	}
 
 	stage ('JARbuild') {
-		sh "ls -lah"
-		sh "mvn package"
+		sh "mvn package -DskipTests=true"
 	}
 
 }
+

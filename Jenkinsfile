@@ -10,16 +10,22 @@ node('maven') {
 		sh "mvn package -DskipTests=true"
 	}
 
-	stage('SonarQube analysis') { 
-		def scannerHome = tool 'sonarqube';
-		withSonarQubeEnv('sonarqube') {
-		sh "${scannerHome}/bin/sonar-scanner"
-		sh "sleep 10"
-		}
-		def qualitygate = waitForQualityGate();
-			if (qualitygate.status != "OK") {
-			error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-		}  
+	stage('Code Analysis') {
+    	steps {
+        	script {
+            	if (env.WITH_SONAR.toBoolean()) {
+                	sh "mvn sonar:sonar -Dsonar.host.url=http://sonarqube:9000 -DskipTests=true"
+                } else {
+                	sh "mvn site -DskipTests=true"
+                      
+                      step([$class: 'CheckStylePublisher', unstableTotalAll:'300'])
+                      step([$class: 'PmdPublisher', unstableTotalAll:'20'])
+                      step([$class: 'FindBugsPublisher', pattern: '**/findbugsXml.xml', unstableTotalAll:'20'])
+                      step([$class: 'JacocoPublisher'])
+                      publishHTML (target: [keepAll: true, reportDir: 'target/site', reportFiles: 'project-info.html', reportName: "Site Report"])
+                }
+            }
+        }
     }
 
 	stage ('PushToNexus') {

@@ -72,7 +72,7 @@
 		</repository>
 		<snapshotRepository>
 			<id>nexus</id>
-			<url>http://nexus-cicd.getup.io/content/repositories/snapshots</url>
+			<url>http://nexus-cicd.getup.io/content/repositories/releases</url>
 		</snapshotRepository>
 	</distributionManagement>
 

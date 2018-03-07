@@ -11,8 +11,8 @@ node('maven') {
 	}
 
 	stage('SonarQube analysis') { 
-		def scannerHome = tool 'SonarQubeScanner';
-		withSonarQubeEnv('SonarQubeScanner') {
+		def scannerHome = tool 'sonarqube';
+		withSonarQubeEnv('sonarqube') {
 		sh "${scannerHome}/bin/sonar-scanner"
 		sh "sleep 10"
 		}
@@ -28,18 +28,3 @@ node('maven') {
 
 }
 
-
-
-def SonarQubeAnalysis () {
-    stage('SonarQube analysis') { 
-      def scannerHome = tool 'SonarQubeScanner';
-      withSonarQubeEnv('SonarQubeScanner') {
-      sh "${scannerHome}/bin/sonar-scanner"
-      sh "sleep 10"
-      }
-      def qualitygate = waitForQualityGate();
-      if (qualitygate.status != "OK") {
-        error "Pipeline aborted due to quality gate coverage failure: ${qualitygate.status}"
-      }  
-    }
-}

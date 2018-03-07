@@ -11,12 +11,7 @@ node('maven') {
 	}
 
 	stage ('SonarTests') {
-		sh "mvn -s configuration/cicd-settings.xml site -DskipTests=true"
-		step([$class: 'CheckStylePublisher', unstableTotalAll:'300'])
-		step([$class: 'PmdPublisher', unstableTotalAll:'20'])
-		step([$class: 'FindBugsPublisher', pattern: '**/findbugsXml.xml', unstableTotalAll:'20'])
-		step([$class: 'JacocoPublisher'])
-		publishHTML (target: [keepAll: true, reportDir: 'target/site', reportFiles: 'project-info.html', reportName: "Site Report"])
+		sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar"
 	}
 
 	stage ('PushToNexus') {

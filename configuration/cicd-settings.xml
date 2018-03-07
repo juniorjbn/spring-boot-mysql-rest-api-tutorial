@@ -11,7 +11,7 @@
       <!--This sends everything else to /public -->
       <id>nexus</id>
       <mirrorOf>*</mirrorOf>
-      <url>http://nexus-cicd.getup.io/content/groups/public/</url>
+      <url>http://nexus-cicd.getup.io/content/repositories/public/</url>
     </mirror>
   </mirrors>
   <profiles>

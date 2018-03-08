@@ -19,16 +19,15 @@ node('maven') {
 	}
 
 	stage ('BuildDEV') {
-		sh "cp target/ROOT-1.0.war oc-build/deployments/ROOT.war"
+	//	sh "cp -R target/* oc-build/deployments/"
+	// delete aold things
+		sh "oc delete bc,dc -l app=notes -n dev"
     // create build. override the exit code since it complains about exising imagestream
 		sh "oc new-build --name=notes --image-stream=redhat-openjdk18-openshift:1.0 --binary=true --labels=app=notes -n dev || true"
     // build image
-        sh "oc start-build notes --from-dir=oc-build --wait=true -n dev"
+        sh "oc start-build notes --from-file=target/ROOT-1.0.jar --wait=true -n dev"
     // deploy image
-    // usar o plugin para oc rollout latest notes
-
-
+    //	sh "oc -n dev rollout latest notes"
 	}
 
 }
-

@@ -20,7 +20,7 @@ node('maven') {
 
 	stage ('BuildDEV') {
 	// delete old things
-		sh "oc delete bc,dc -l app=notes -n dev"
+		sh "oc delete buildconfig,deploymentconfig -l app=notes -n dev"
     // create build. override the exit code since it complains about exising imagestream
 		sh "oc new-build --name=notes --image-stream=redhat-openjdk18-openshift:1.0 --binary=true --labels=app=notes -n dev || true"
     // build image

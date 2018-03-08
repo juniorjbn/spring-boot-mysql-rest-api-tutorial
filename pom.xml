@@ -6,7 +6,7 @@
 	<groupId>com.example</groupId>
 	<artifactId>ROOT</artifactId>
 	<version>1.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 	<name>easy-notes</name>
 	<description>Rest API for a Simple Note Taking Application</description>

@@ -7,7 +7,7 @@ node('maven') {
 	}
 
 	stage ('JarBuild') {
-		sh "mvn package -DskipTests=true"
+		sh "mvn -s configuration/cicd-settings.xml clean install  -DskipTests=true && mvn package -DskipTests=true"
 	}
 
 	stage('Code Analysis') {

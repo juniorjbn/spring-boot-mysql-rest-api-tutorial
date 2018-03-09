@@ -31,7 +31,7 @@ node('maven') {
 
     stage ('IntegrationTest') {
         sh "sleep 10"
-        sh "curl http://notes:8080/api/notes/3 | grep ok"
+        sh "curl http://notes-dev.getup.io/api/notes/3 | grep ok"
     }
 
     stage ('PromoteStage') {

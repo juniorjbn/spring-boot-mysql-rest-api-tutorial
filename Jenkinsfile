@@ -24,8 +24,9 @@ node('maven') {
     // create build. override the exit code since it complains about exising imagestream
 	//	sh "oc -n dev new-build --name=notes --image-stream=redhat-openjdk18-openshift:1.0 --binary=true --labels=app=notes || true"
     // build image
-        sh "oc -n dev start-build notes --from-file=target/ROOT-1.0.jar --wait=true"
+        sh "oc -n dev start-build notes --from-file=target/ROOT-1.0.jar"
     // deploy new version
+    	sh "sleep 90"
     	sh "oc -n dev rollout latest notes"
 	}
 

@@ -25,9 +25,8 @@ node('maven') {
 	//	sh "oc -n dev new-build --name=notes --image-stream=redhat-openjdk18-openshift:1.0 --binary=true --labels=app=notes || true"
     // build image
         sh "oc -n dev start-build notes --from-file=target/ROOT-1.0.jar"
-    // deploy new version
+    // wait for deploy new version
     	sh "sleep 90"
-    	sh "oc -n dev rollout latest notes"
 	}
 
     stage ('IntegrationTest') {
@@ -35,4 +34,8 @@ node('maven') {
         sh "curl http://notes:8080/api/notes/3 | grep ok"
     }
 
+    stage ('PromoteStage') {
+    // tag dev image to use in stage
+    	sh "oc tag dev/notes:latest stage/notes:latest"
+    }
 }

@@ -65,3 +65,10 @@ You can test them using postman or any other rest client.
 You can find the tutorial for this application on my blog -
 
 <https://www.callicoder.com/spring-boot-rest-api-tutorial-with-mysql-jpa-hibernate/>
+
+
+## Pipeline
+
+I've used an idea from openshift-cd-demo and apply it here to demonstrate a pipeline with jenkins, java, mysql, sonarqube, nexus and deploy all this stack on openshift.
+
+![alt text](https://raw.githubusercontent.com/juniorjbn/spring-boot-mysql-rest-api-tutorial/master/images/jenkins-pipeline.png)
